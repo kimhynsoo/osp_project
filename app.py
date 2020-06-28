@@ -14,6 +14,7 @@ import numpy
 from nltk import word_tokenize
 import math
 from nltk.corpus import stopwords
+import time
 import timeit
 from requests.exceptions import ConnectionError
 from elasticsearch import Elasticsearch
@@ -175,9 +176,6 @@ def name2_check():
             print ("word_d")
             print (word_d)
             word_d_list.append(word_d)
-
-            print  ("word_d_list"+str(len(word_d_list)))
-            print (word_d_list)
             url_list.append(url)
 
             if( len(url_list) < 2 ):
@@ -205,7 +203,6 @@ def name2_check():
             es.index(index='result',doc_type='doc',id=tmp,body=e2)
             tmp+=1
             stop = timeit.default_timer() #시간측정 stop
-
             str1 = str(url_list)
             
             whole_count = {}
@@ -264,6 +261,7 @@ def name3_check():
 
                     try:
                         res = requests.get(url,timeout=5)
+                        start = time.time()
                     except ConnectionError as e:
                         print ("유효 하지 않은 사이트")
                         denied.append(url)
@@ -328,6 +326,7 @@ def name3_check():
             es.index(index='result',doc_type='doc',id=tmp,body=e2)
             tmp+=1
             stop = timeit.default_timer() #시간측정 stop
+
             str1 = str(repeat)
             str2 = str(denied)
             str3 = str(checked)

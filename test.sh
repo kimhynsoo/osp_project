@@ -2,6 +2,6 @@
 
 mkdir -p templates
 
-cp hello.html templates
+cp result.html templates
 
 python3 app.py
