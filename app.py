@@ -118,10 +118,12 @@ def name2_check():
             checked = []
             count = 0
             es = Elasticsearch(host="127.0.0.1",port="5000",timeout=30)
-
+            e0={
+                "url" : a
+            }
             while True:
                 try:
-                    docs = es.search(index='url')
+                    docs = es.search(index='url', body=e0)
                     url_list=[]
                     word_d_list=[]
                     if docs['hits']['total'] > 0:
